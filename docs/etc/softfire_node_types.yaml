@@ -26,6 +26,43 @@ node_types:
 
   SecurityResource:
     derived_from: eu.softfire.BaseResource
+    description: Defines a Security agent to be deployed. More details on <docu_URL>
+    properties:
+      resource_id:
+        description: Defines the type of the Security Resource. To date only 'firewall' is accepted
+        type: string
+        required: true
+        default: firewall
+      testbed:
+        description: Defines where to deploy the Security Resource selected. It is ignored if want_agent is True
+        type: string
+        required: false
+      want_agent:
+        description: Defines if the Experimenter wants the security resource to be an agent directly installed on the VM that she wants to monitor
+        type: boolean
+        required: true
+        default: true
+      logging:
+        description: Defines if the Experimenter wants the security resource to send its log messages to a collector and she wants to see them on a dashboard
+        type: boolean
+        required: true
+        default: true
+      allowed_ips:
+        description: List of IPs (or CIDR  masks) allowed by the firewall. [allow from <IP>]
+        type: list
+        entry_schema:
+          type: string
+        required: false
+      denied_ips:
+        description: List of IPs (or CIDR masks) denied by the firewall [deny from <IP>]
+        type: list
+        entry_schema:
+          type: string
+        required: false
+        default_rule:
+          description: default rule applied by the firewall (allow/deny)
+          type: string
+          required: true
 
   NfvResource:
     derived_from: eu.softfire.BaseResource
